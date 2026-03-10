@@ -1,0 +1,10 @@
+[
+  { "category": "Fruit", "name": "Apple", "price": 1.2, "stocked": true },
+  { "category": "Fruit", "name": "Banana", "price": 0.8, "stocked": true },
+  { "category": "Fruit", "name": "Pineapple", "price": 0.9, "stocked": true },
+  { "category": "Fruit", "name": "Peach", "price": 1.0, "stocked": false },
+  { "category": "Vegetable", "name": "Carrot", "price": 0.5, "stocked": true },
+  { "category": "Vegetable", "name": "Bean", "price": 1.4, "stocked": false },
+  { "category": "Vegetable", "name": "Potatoe", "price": 2.0, "stocked": true },
+  { "category": "Vegetable", "name": "Broccoli", "price": 1.9, "stocked": false }
+]
