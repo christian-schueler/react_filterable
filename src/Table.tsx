@@ -24,14 +24,39 @@ const Table = () => {
   ) => {
     setFilteredSortedData(
       [...filteredSortedData].sort((a: DataRow, b: DataRow) => {
-        const valueA = String(a[key]).toUpperCase();
-        const valueB = String(b[key]).toUpperCase();
+        let valueA: string | number | boolean = '';
+        let valueB: string | number | boolean = '';
+
+        switch (typeof a[key]) {
+          case 'string':
+            valueA = String(a[key]).toUpperCase();
+            break;
+          case 'number':
+            valueA = Number(a[key]);
+            break;
+          case 'boolean':
+            valueA = Boolean(a[key]);
+            break;
+        }
+
+        switch (typeof b[key]) {
+          case 'string':
+            valueB = String(b[key]).toUpperCase();
+            break;
+          case 'number':
+            valueB = Number(b[key]);
+            break;
+          case 'boolean':
+            valueB = Boolean(b[key]);
+            break;
+        }
 
         // returning different values depending on the sort direction
-        if (valueA < valueB) {
-          return direction === SORT_DIRECTION.UP ? -1 : 1;
-        } else if (valueA > valueB) {
-          return direction === SORT_DIRECTION.DOWN ? 1 : -1;
+        switch (direction) {
+          case SORT_DIRECTION.UP:
+            return valueA < valueB ? -1 : 1;
+          case SORT_DIRECTION.DOWN:
+            return valueA > valueB ? -1 : 1;
         }
         return 0;
       }),

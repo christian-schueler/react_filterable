@@ -17,25 +17,28 @@ const Thead = ({ data, onSort }: { data: any[]; onSort: any }) => {
     event.preventDefault();
     event.stopPropagation();
 
-    const currentTarget = event.target as unknown as HTMLElement;
+    const currentTarget = event.currentTarget as unknown as HTMLElement;
+    const dataSetKey: string = currentTarget.dataset.key ?? '';
+    const dataSetSortDirection: string =
+      currentTarget.dataset.sortdirection ?? '';
 
-    setSortDirection(currentTarget.dataset.key ?? '');
-    setCategory(currentTarget.dataset.sortdirection ?? '');
+    setSortDirection(dataSetKey);
+    setCategory(dataSetSortDirection);
 
-    if (sortDirection !== '') {
-      switch (sortDirection) {
+    if (dataSetSortDirection !== '') {
+      switch (dataSetSortDirection) {
         case 'up':
-          if (!isUpVisible) toggleUpVisibility();
-          if (isDownVisible) toggleDownVisibility();
-          break;
-        case 'down':
           if (isUpVisible) toggleUpVisibility();
           if (!isDownVisible) toggleDownVisibility();
+          break;
+        case 'down':
+          if (!isUpVisible) toggleUpVisibility();
+          if (isDownVisible) toggleDownVisibility();
           break;
       }
     }
 
-    onSort(category, sortDirection);
+    onSort(dataSetKey, dataSetSortDirection);
   };
 
   return (
@@ -43,7 +46,7 @@ const Thead = ({ data, onSort }: { data: any[]; onSort: any }) => {
       <tr>
         {dataColumns.map((column) => (
           <th key={column}>
-            {column}&nbsp;
+            {column}
             <span
               onClick={onClick}
               data-key={column}
@@ -51,9 +54,8 @@ const Thead = ({ data, onSort }: { data: any[]; onSort: any }) => {
               className="material-symbols-outlined"
               hidden={isDownVisible && !isUpVisible}
             >
-              ArrowDropUpIcon
+              <ArrowDropUpIcon />
             </span>
-            &nbsp;
             <span
               onClick={onClick}
               data-key={column}
@@ -61,7 +63,7 @@ const Thead = ({ data, onSort }: { data: any[]; onSort: any }) => {
               className="material-symbols-outlined"
               hidden={!isDownVisible && isUpVisible}
             >
-              ArrowDropDownIcon
+              <ArrowDropDownIcon />
             </span>
           </th>
         ))}

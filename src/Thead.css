@@ -1,7 +1,12 @@
-.hidden {
+[hidden] {
   display: none;
 }
 
 .visible {
   display: inline;
+}
+
+span[data-sortdirection] {
+  position: relative;
+  cursor: pointer;
 }
